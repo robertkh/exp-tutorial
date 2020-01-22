@@ -9,6 +9,14 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+////////////////////////////////////////////////////
+//Устанавливаем соединение с mongoose
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://robert:parnarareg3@ds125302.mlab.com:25302/local_library';
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 /////////////////////////////////////////////////////
 // view engine setup
