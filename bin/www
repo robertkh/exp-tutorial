@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// Սկսվում ա սրանից, կանչում ա C:\Users\main_user\Desktop\express-locallibrary-tutorial\app.js
+
 /**
  * Module dependencies.
  */
