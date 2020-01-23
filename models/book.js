@@ -9,7 +9,8 @@ var BookSchema = new Schema(
     summary: {type: String, required: true},
     isbn: {type: String, required: true},
     genre: [{type: Schema.ObjectId, ref: 'Genre'}]
-  }
+  },
+  { versionKey: false }
 );
 
 // Virtual for book's URL
