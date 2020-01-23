@@ -31,7 +31,7 @@ exports.bookinstance_detail = function(req, res, next) {
           return next(err);
         }
       // Successful, so render.
-      console.log(bookinstance);
+      //console.log(bookinstance.due_back);
       res.render('bookinstance_detail', { title: 'Copy: '+bookinstance.book.title, bookinstance:  bookinstance});
     })
 
