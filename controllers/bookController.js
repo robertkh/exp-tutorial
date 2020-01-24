@@ -28,7 +28,6 @@ exports.index = function(req, res) {
         }
     }, function(err, results) {
         res.render('index', { title: 'Local Library Home', error: err, data: results });
-        //console.log(results);
     });
 };
 
@@ -42,7 +41,6 @@ exports.book_list = function(req, res, next) {
     .exec(function (err, list_books) {
       if (err) { return next(err); }
       //Successful, so render
-      //console.log(list_books);
       res.render('book_list', { title: 'Book List', book_list: list_books });
     });
     
@@ -74,7 +72,6 @@ exports.book_detail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        //console.log(results);
         res.render('book_detail', { title: results.book.title, book: results.book, book_instances: results.book_instance } );
     });
 
