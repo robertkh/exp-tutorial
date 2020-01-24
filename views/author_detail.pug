@@ -5,7 +5,11 @@ block content
   h1 Author: #{author.name}
   //p #{author.date_of_birth} - #{author.date_of_death}
   // Բոլոր տեղերում սա օգտագործել։
-  p    L i f e s p a n: #{author.lifespan}
+  if author.date_of_death
+    p    #[strong L i f e s p a n:] #{author.lifespan}
+  else
+    //- p    #[strong Date  of  Birth:]  #{author.date_of_birth}
+    p    #[strong Date  of  Birth:]  #{author.dob}
   
   div(style='margin-left:20px;margin-top:20px')
 

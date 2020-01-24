@@ -33,5 +33,18 @@ AuthorSchema
   return moment(this.date_of_birth).format('MMMM Do, YYYY')+' - '+ moment(this.date_of_death).format('MMMM Do, YYYY');
 });
 
+
+AuthorSchema
+.virtual('dob')
+.get(function () {
+  return moment(this.date_of_birth).format('MMMM Do, YYYY');
+});
+
+AuthorSchema
+.virtual('dod')
+.get(function () {
+  return moment(this.date_of_death).format('MMMM Do, YYYY');
+});
+
 //Export model
 module.exports = mongoose.model('Author', AuthorSchema);
