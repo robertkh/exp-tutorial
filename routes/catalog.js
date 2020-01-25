@@ -47,43 +47,42 @@ router.get('/book/:id', book_controller.book_detail);
 /////////////////////////////////////////////////
 // GET request for list of all Book items.
 router.get('/books', book_controller.book_list);
-
+//==========================================================================
 /////////////////////////////
 /// A U T H O R    ROUTES ///
 /////////////////////////////
 
-// GET request for creating Author. NOTE This must come before route for id (i.e. display author).
-// GET-запрос для создания автора. Должен появиться до маршрута для id (для вывода автора)
+//////////////////////////////////////////////  +++++++++++++++++
 router.get('/author/create', author_controller.author_create_get);
 
-///////////////////////////////////////////
+/////////////////////////////////////////// ++++++++++++++++++
 // POST request for creating Author.
 router.post('/author/create', author_controller.author_create_post);
 
-///////////////////////////////////////////
+///////////////////////////////////////////    +++++++++++++++++++++
 // GET request to delete Author.
 router.get('/author/:id/delete', author_controller.author_delete_get);
 
-/////////////////////////////////////////
+/////////////////////////////////////////    ++++++++++++++++++
 // POST request to delete Author.
 router.post('/author/:id/delete', author_controller.author_delete_post);
 
-//////////////////////////////////////////
+//////////////////////////////////////////   ---------------
 // GET request to update Author.
 router.get('/author/:id/update', author_controller.author_update_get);
 
-///////////////////////////////////////////
+///////////////////////////////////////////   ----------------
 // POST request to update Author.
 router.post('/author/:id/update', author_controller.author_update_post);
 
-//////////////////////////////////////
+//////////////////////////////////////   +++++++++++++++++
 // GET request for one Author.
 router.get('/author/:id', author_controller.author_detail);
 
-//////////////////////////////////////////////
+//////////////////////////////////////////////   +++++++++++++
 // GET request for list of all Authors.
 router.get('/authors', author_controller.author_list);
-
+//==================================================================
 ///////////////////////////
 /// G E N R E    ROUTES ///
 ///////////////////////////
