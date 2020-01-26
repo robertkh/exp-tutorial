@@ -128,7 +128,7 @@ exports.author_delete_get = function(req, res, next) {
             res.redirect('/catalog/authors');
         }
         // Удачно, значит рендерим.
-        { console.log(`module is -> ${module.filename}`); console.log(results);}
+        //{ console.log(`module is -> ${module.filename}`); console.log(results);}
         res.render('author_delete', { title: 'Delete Author', author: results.author, author_books: results.authors_books } );
     });
 

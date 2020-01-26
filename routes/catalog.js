@@ -118,13 +118,12 @@ router.get('/genre/:id', genre_controller.genre_detail);
 //////////////////////////////////////////
 // GET request for list of all Genre.
 router.get('/genres', genre_controller.genre_list);
-
+//=========================================================================================
 /////////////////////////////////////////
 /// B O O K I N S T A N C E    ROUTES ///
 /////////////////////////////////////////
 
-// GET request for creating a BookInstance. NOTE This must come before route that displays BookInstance (uses id).
-// GET-запрос для создания экземпляра книги. Должен появиться до маршрута, выводящего BookInstance с использованием id
+///////////////////////////////////////////////
 router.get('/bookinstance/create', book_instance_controller.bookinstance_create_get);
 
 ////////////////////////////////////////////
