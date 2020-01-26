@@ -201,7 +201,7 @@ exports.book_delete_get = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        { console.log(`module is -> ${module.filename}`); console.log(results);}
+        //{ console.log(`module is -> ${module.filename}`); console.log(results);}
         res.render('book_delete', { title: results.book.title, book: results.book, book_instances: results.book_instance } );
     });
 
