@@ -104,31 +104,109 @@ exports.genre_create_post =  [
 ];
 
 ///////////////////////////////////////
-// Display Genre delete form on GET.
+// Display Genre delete form on GET. +++++++++++++++++++++
 
-exports.genre_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre delete GET');
-};
+exports.genre_delete_get = function(req, res, next) {
+
+    async.parallel({
+        genre: function(callback) {
+            Genre
+            .findById(req.params.id)
+            .exec(callback);
+        },
+
+        genre_books: function(callback) {
+            Book
+            .find({ 'genre': req.params.id })
+            .exec(callback);
+        },
+
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.genre==null) { // No results. Միայն տեսականորեն սա կարա լինի
+            var err = new Error('Genre not found');
+            err.status = 404;
+            return next(err);
+            res.redirect('/catalog/genres');
+        }
+
+        // Successful, so render
+        // { console.log(`module is -> ${module.filename}`); console.log(results);}
+       res.render('genre_delete', {  title: 'Delete Genre', genre: results.genre, genre_books: results.genre_books } );
+    });
+}
 
 ///////////////////////////////////////////
-// Handle Genre delete on POST.
+// Handle Genre delete on POST. ++++++++++++++++++
 
-exports.genre_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre delete POST');
-};
+exports.genre_delete_post = function(req, res, next) {
+
+            // console.log(req.body.genreid);
+            // console.log(req.body.id); Սա չի աշխատում
+            // Հեղինակի մոտ անիմաստ երկարացրել է։
+            
+            Genre.findByIdAndRemove(req.body.genreid, function deleteGenre(err) {
+                
+                if (err) { return next(err); }
+                
+                // Успех-перейти к списку авторов
+                res.redirect('/catalog/genres')
+            })
+        }
 
 /////////////////////////////////////////
 // Display Genre update form on GET.
 
-exports.genre_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre update GET');
+exports.genre_update_get = function(req, res, next) {
+
+    // Քանի որ այստեղ հայտնվում ենք details - ից, ապա id-ն ունենք՝ req.params.id
+    Genre.findById(req.params.id, function(err, genre) {
+        if (err) { return next(err); }
+        if (genre==null) { // No results. Երևակայական դեպք է։
+            var err = new Error('Genre not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Success.
+        // console.log(genre);
+        res.render('genre_form', { title: 'Update Genre', genre: genre });
+    });
+
 };
 
 ////////////////////////////////////////
 // Handle Genre update on POST.
 
-exports.genre_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre update POST');
-};
+exports.genre_update_post = [
 
+  validator.body('name', 'Genre name required').isLength({ min: 1 }).trim(),
+  validator.sanitizeBody('name').escape(),
+  
+  (req, res, next) => {
+
+      const errors = validator.validationResult(req);  
+
+      var genre = new Genre({
+
+              name: req.body.name,
+              _id: req.params.id
+
+          });
+
+      if (!errors.isEmpty()) {
+            // There are errors. Render the form again with sanitized values and error messages.
+            res.render('genre_form', { title: 'Update Genre', genre: genre, errors: errors.array()});
+        return;
+        }
+        else {
+            // Data from form is valid. Update the record.
+            Genre.findByIdAndUpdate(req.params.id, genre, {}, function (err,thegenre) {
+                if (err) { return next(err); }
+                   // Successful - redirect to genre detail page.
+                   res.redirect(thegenre.url);
+                });
+        }
+    },
+         
+  ];
 ////////////////////////////////////////////

@@ -47,7 +47,7 @@ exports.author_detail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        //{ console.log(`module is -> ${module.filename}`); console.log(req.body);}
+        //{ console.log(`module is -> ${module.filename}`); console.log(results);}
         res.render('author_detail', { title: 'Author Detail', author: results.author, author_books: results.authors_books } );
     });
 
