@@ -116,7 +116,7 @@ exports.bookinstance_create_post = [
 // Display BookInstance delete form on GET. +++++++++++++++++
 
 exports.bookinstance_delete_get = function(req, res, next) {
-
+    
     BookInstance
     .findById(req.params.id)
     .populate('book')

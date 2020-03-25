@@ -155,7 +155,7 @@ exports.genre_delete_post = function(req, res, next) {
         }
 
 /////////////////////////////////////////
-// Display Genre update form on GET.
+// Display Genre update form on GET. +++++++++++++++++++++
 
 exports.genre_update_get = function(req, res, next) {
 
@@ -175,7 +175,7 @@ exports.genre_update_get = function(req, res, next) {
 };
 
 ////////////////////////////////////////
-// Handle Genre update on POST.
+// Handle Genre update on POST.  ++++++++++++++++++++
 
 exports.genre_update_post = [
 

@@ -3,8 +3,12 @@
 // const { sanitizeBody } = require('express-validator/filter');
 // Սա ավելի լավ գրելաձև է՝ կարճ է։
 
-const { body,validationResult } = require('express-validator');
+// const { body,validationResult, sanitizeBody } = require('express-validator');
+// Վերևում գրածը ևս ճիշտ է
+
+const { body, validationResult } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
+
 
 var async = require('async');
 var Book = require('../models/book');
@@ -54,7 +58,7 @@ exports.author_detail = function(req, res, next) {
 };
 
 ////////////////////////////////////////////////////////
-// Показать форму создания автора по запросу GET.
+// Показать форму создания автора по запросу GET. ++++++++++++++++++++
 
 exports.author_create_get = function(req, res, next) {       
     res.render('author_form', { title: 'Create Author'});

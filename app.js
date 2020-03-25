@@ -4,6 +4,12 @@ var cookieParser = require('cookie-parser');
 var createError = require('http-errors');
 var path = require('path');
 
+////////////////////////////////////////////
+// +++++++++++++++++++++++++++++++
+//var fs = require('fs');
+//var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+////////////////////////////////////////////////////////////////////////
+
 // կանչում ա սրանց հենց այս կետից, բայց handler-ը չի կանչվում
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -27,12 +33,29 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+///////////////////////////////////
+//app.use(logger('dev'));
+//':method' -> get
+// :referrer ->  http://localhost:3000/catalog/authors
+// :remote-addr -> ::1
+// :remote-user -> -
+// :req[header] -> -
+// :res[header] -> -
+// :response-time[digits] -> The time between the request the response in milliseconds.
+// :url -> /catalog/bookinstances
+// :user-agent
+// :date[web] -> Sat, 08 Feb 2020 19:14:34 GMT
+// app.use(logger('combined', { stream: accessLogStream }));
+//app.use(logger('tiny')); 
+// app.use(logger(':method :url :response-time[4] :status')); 
 
-app.use(logger('dev'));
+app.use(logger('dev', { skip: (req, res) => { return res.statusCode < 400 } }));
+
+//////////////////////////////////////
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(  express.static( path.join(__dirname, 'public') )  );
 
 /////////////////////////////////////////////////////////////
 // init callbacks, then invokes Router երբ էջը բացում ենք
@@ -59,6 +82,9 @@ app.use(function(err, req, res, next) {
   //////////////////////////////////////////////////////
   // render the error page
   res.status(err.status || 500);
+
+
+
   res.render('error');
 });
 
