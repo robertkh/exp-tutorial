@@ -29,3 +29,11 @@
    -> git push -u origin master
    
 =======
+
+Deploying Node App to Heroku   https://dev.to/easybuoy/deploying-node-app-to-heroku-286n
+
+Deploying using Github
+
+After creating the application, under the deploy section, connect your Github account to Heroku and deploy the application.
+
+Note: Heroku looks for a start script in your package.json file <-> Procfile !!!!!!!!!!!!!!!!
