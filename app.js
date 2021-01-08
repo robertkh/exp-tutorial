@@ -23,7 +23,7 @@ var app = express();
 //Устанавливаем соединение с mongoose
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://robert:parnarareg3@ds125302.mlab.com:25302/local_library';
+var mongoDB = 'mongodb+srv://robert:parnarareg3@cluster0.exdyz.mongodb.net/local_library?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
